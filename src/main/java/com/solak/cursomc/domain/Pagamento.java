@@ -10,6 +10,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.solak.cursomc.domain.enuns.EstadoPagamento;
 
 //abstract -> para garantir que não será instanciado pagamento, e sim pagtoComCartao e PagtoComBoleto
@@ -26,6 +27,7 @@ public abstract class Pagamento implements Serializable {
 	//retirado EstadoPagamento e informado Integer
 	private Integer estado;
     
+	@JsonBackReference
 	@OneToOne
 	@JoinColumn(name="pedido_id")
 	@MapsId
