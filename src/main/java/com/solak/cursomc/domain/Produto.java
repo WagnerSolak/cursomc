@@ -15,27 +15,24 @@ import javax.persistence.ManyToMany;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
-public class Produto implements Serializable{
+public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private Double preco;
-	
-	//quando tenho lstas em duas tabelas usa-se em uma  a anotação abaixo
-	@JsonBackReference  //do outro lado da associação ja trouxe os objetos
+
+	// quando tenho lstas em duas tabelas usa-se em uma a anotação abaixo
+	@JsonBackReference // do outro lado da associação ja trouxe os objetos
 	@ManyToMany
-	@JoinTable(name = "PRODUTO_CATEGORIA", 
-	    joinColumns = @JoinColumn(name="produto_id"),
- inverseJoinColumns = @JoinColumn(name="categoria_id")
-	)
-	private List<Categoria>categorias = new ArrayList<>();
-	
+	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
+	private List<Categoria> categorias = new ArrayList<>();
+
 	public Produto() {
-		
+
 	}
 
 	public Produto(Integer id, String nome, Double preco) {
@@ -101,8 +98,5 @@ public class Produto implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }

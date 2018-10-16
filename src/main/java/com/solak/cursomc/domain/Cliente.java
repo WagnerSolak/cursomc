@@ -18,125 +18,133 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.solak.cursomc.domain.enuns.TipoCliente;
 
 @Entity
-public class Cliente implements Serializable{
-	
- /**
-	 * 
-	 */
+public class Cliente implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-@Id
- @GeneratedValue(strategy=GenerationType.IDENTITY)
- private Integer id;
- private String nome;
- private String email;
- private String cpfOuCnpj;
- private Integer tipoCliente;
- 
- @JsonManagedReference
- @OneToMany(mappedBy="cliente")
- private List<Endereco>enderecos = new ArrayList<>();
- 
- //set nao tem repeticao
- @ElementCollection
- @CollectionTable(name="TELEFONE")
- private Set<String>telefones = new HashSet<>();
- 
- public Cliente() {
-	 
- }
 
-public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipoCliente) {
-	super();
-	this.id = id;
-	this.nome = nome;
-	this.email = email;
-	this.cpfOuCnpj = cpfOuCnpj;
-	this.tipoCliente = tipoCliente.getCod();
-}
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
+	private String nome;
+	private String email;
+	private String cpfOuCnpj;
+	private Integer tipoCliente;
 
-public Integer getId() {
-	return id;
-}
+	@JsonManagedReference
+	@OneToMany(mappedBy = "cliente")
+	private List<Endereco> enderecos = new ArrayList<>();
 
-public void setId(Integer id) {
-	this.id = id;
-}
+	// set nao tem repeticao
+	@ElementCollection
+	@CollectionTable(name = "TELEFONE")
+	private Set<String> telefones = new HashSet<>();
 
-public String getNome() {
-	return nome;
-}
+	@OneToMany(mappedBy="cliente")
+	private List<Pedido> pedidos = new ArrayList<>();
 
-public void setNome(String nome) {
-	this.nome = nome;
-}
+	public Cliente() {
 
-public String getEmail() {
-	return email;
-}
+	}
 
-public void setEmail(String email) {
-	this.email = email;
-}
+	// colecoes nao entra no construtor
+	public Cliente(Integer id, String nome, String email, String cpfOuCnpj, TipoCliente tipoCliente) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.cpfOuCnpj = cpfOuCnpj;
+		this.tipoCliente = tipoCliente.getCod();
+	}
 
-public String getCpfOuCnpj() {
-	return cpfOuCnpj;
-}
+	public Integer getId() {
+		return id;
+	}
 
-public void setCpfOuCnpj(String cpfOuCnpj) {
-	this.cpfOuCnpj = cpfOuCnpj;
-}
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getCpfOuCnpj() {
+		return cpfOuCnpj;
+	}
+
+	public void setCpfOuCnpj(String cpfOuCnpj) {
+		this.cpfOuCnpj = cpfOuCnpj;
+	}
+
+	public List<Pedido> getPedidos() {
+		return pedidos;
+	}
+
+	public void setPedidos(List<Pedido> pedidos) {
+		this.pedidos = pedidos;
+	}
 
 //retorna um integer e trasforma em um TipoEnumerado (enuns)
-public TipoCliente getTipoCliente() {
-	return TipoCliente.toEnum(tipoCliente);
-}
+	public TipoCliente getTipoCliente() {
+		return TipoCliente.toEnum(tipoCliente);
+	}
 
 //armazena internamente um integer
-public void setTipoCliente(TipoCliente tipoCliente) {
-	this.tipoCliente = tipoCliente.getCod();
-}
+	public void setTipoCliente(TipoCliente tipoCliente) {
+		this.tipoCliente = tipoCliente.getCod();
+	}
 
-public List<Endereco> getEnderecos() {
-	return enderecos;
-}
+	public List<Endereco> getEnderecos() {
+		return enderecos;
+	}
 
-public void setEnderecos(List<Endereco> enderecos) {
-	this.enderecos = enderecos;
-}
+	public void setEnderecos(List<Endereco> enderecos) {
+		this.enderecos = enderecos;
+	}
 
-public Set<String> getTelefones() {
-	return telefones;
-}
+	public Set<String> getTelefones() {
+		return telefones;
+	}
 
-public void setTelefones(Set<String> telefones) {
-	this.telefones = telefones;
-}
+	public void setTelefones(Set<String> telefones) {
+		this.telefones = telefones;
+	}
 
-@Override
-public int hashCode() {
-	final int prime = 31;
-	int result = 1;
-	result = prime * result + ((id == null) ? 0 : id.hashCode());
-	return result;
-}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
 
-@Override
-public boolean equals(Object obj) {
-	if (this == obj)
-		return true;
-	if (obj == null)
-		return false;
-	if (getClass() != obj.getClass())
-		return false;
-	Cliente other = (Cliente) obj;
-	if (id == null) {
-		if (other.id != null)
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
 			return false;
-	} else if (!id.equals(other.id))
-		return false;
-	return true;
-}
- 
- 
- 
+		if (getClass() != obj.getClass())
+			return false;
+		Cliente other = (Cliente) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
+	}
+
 }

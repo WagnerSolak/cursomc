@@ -12,27 +12,27 @@ import javax.persistence.ManyToMany;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
-
 @Entity
-public class Categoria implements Serializable{
-	
-	//interface que fala que o objeto pode ser trafegar em rede por exemplo
+public class Categoria implements Serializable {
+
+	// interface que fala que o objeto pode ser trafegar em rede por exemplo
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	private String nome;
-	
+
 	@JsonManagedReference
-	@ManyToMany(mappedBy="categorias")
-	private List<Produto>produtos= new ArrayList<>();
-	
+	@ManyToMany(mappedBy = "categorias")
+	private List<Produto> produtos = new ArrayList<>();
+
 	public Categoria() {
 	}
 
-	//inclui campos no construtor
+	// inclui campos no construtor
+	//define quem será obrigatório na hora de instanciar
 	public Categoria(Integer id, String nome) {
 		super();
 		this.id = id;
@@ -54,11 +54,11 @@ public class Categoria implements Serializable{
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	public List<Produto> getProdutos() {
 		return produtos;
 	}
-	
+
 	public void setProdutos(List<Produto> produtos) {
 		this.produtos = produtos;
 	}
@@ -71,7 +71,7 @@ public class Categoria implements Serializable{
 		return result;
 	}
 
-	//hashCode e equals -> operações para comparar objetos por valor
+	// hashCode e equals -> operações para comparar objetos por valor
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -88,8 +88,5 @@ public class Categoria implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
+
 }
