@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.solak.cursomc.domain.enuns.EstadoPagamento;
 
-@Entity
+/*@Entity*/
 public class PagamentoComBoleto extends Pagamento {
 
 	private static final long serialVersionUID = 1L;
